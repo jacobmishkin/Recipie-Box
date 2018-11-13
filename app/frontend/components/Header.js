@@ -61,7 +61,7 @@ const Header = () => (
     <div className="bar">
       <Logo>
         <Link href="/">
-          <a>Recipie Box</a>
+          <a>Recipe Box</a>
         </Link>
       </Logo>
       <Nav />
