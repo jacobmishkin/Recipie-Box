@@ -10,6 +10,7 @@ const theme = {
   placeholderGrey: '#727272',
   lightGrey: '#E1E2E1',
   offWhite: '#EDEDED',
+  cream: '#f7f4ef',
   maxWidth: '1200px',
   bs: '0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,0.07)',
 };
@@ -44,11 +45,21 @@ injectGlobal`
   }
   a {
     text-decoration: none;
-    color: ${theme.black}
+    color: ${theme.black};
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a
+  {
+    font-family: 'Avenir Medium';
   }
 `;
 const StyledPage = styled.div`
-  background: white;
+  background: ${props => props.theme.cream};
   color: ${props => props.theme.black};
 `;
 

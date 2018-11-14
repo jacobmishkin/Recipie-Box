@@ -15,7 +15,6 @@ Router.onRouteChangeError = () => {
 };
 
 const Logo = styled.h1`
-  font-family: 'Avenir Medium';
   font-weight: 600;
   font-size: 4rem;
   margin-left: 2rem;
@@ -25,7 +24,6 @@ const Logo = styled.h1`
 
   a {
     padding: 0.5rem 1rem;
-    background: ${props => props.theme.lightGrey};
     color: ${props => props.theme.black};
     text-decoration: none;
     text-transform: uppercase;
@@ -38,7 +36,7 @@ const Logo = styled.h1`
 
 const StyledHeader = styled.header`
   .bar {
-    border-bottom: 5px solid ${props => props.theme.black};
+    border-bottom: 2px solid ${props => props.theme.black};
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: stretch;
@@ -47,12 +45,11 @@ const StyledHeader = styled.header`
       justify-content: center;
     }
   }
-  .sub-bśar {
+  .sub-bar {
     display: grid;
     grid-template-columns: 1fr auto;
     text-align: left;
-    background: white;
-    border-bottom: 1px solid ${props => props.theme.lightGrey};
+    border-bottom: 1px solid ${props => props.theme.black};
   }
 `;
 

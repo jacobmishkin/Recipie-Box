@@ -34,14 +34,14 @@ const NavStyles = styled.ul`
       bottom: 0;
     }
     &:after {
-      height: 2px;
-      background: red;
+      height: 1px;
+      background: ${props => props.theme.black};
       content: '';
       width: 0;
       position: absolute;
       transform: translateX(-50%);
       transition: width 0.4s;
-      transition-timing-function: cubic-bezier(1, -0.65, 0, 2.31);
+      /* transition-timing-function: cubic-bezier(1, -0.65, 0, 2.31); */
       left: 50%;
       margin-top: 2rem;
     }
