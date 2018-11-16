@@ -12,6 +12,20 @@ const ALL_RECIPES_QUERY = gql`
       description
       image
       largeImage
+      cookingTime
+      preperationTime
+      ingredients {
+        id
+        title
+        measurement
+      }
+      directions {
+        id
+        steps {
+          id
+          description
+        }
+      }
     }
   }
 `;
@@ -34,6 +48,7 @@ class Recipes extends Component {
       <Center>
         <Query query={ALL_RECIPES_QUERY}>
           {({ data, error, loading }) => {
+            console.log(data);
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error: {error.message}</p>;
             return (

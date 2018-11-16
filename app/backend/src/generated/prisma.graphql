@@ -1,7 +1,19 @@
 # source: https://us1.prisma.sh/jacob-mishkin/recipe-box/dev
-# timestamp: Tue Nov 13 2018 13:49:10 GMT-0600 (CST)
+# timestamp: Thu Nov 15 2018 10:10:00 GMT-0600 (CST)
+
+type AggregateDirection {
+  count: Int!
+}
+
+type AggregateIngredient {
+  count: Int!
+}
 
 type AggregateRecipe {
+  count: Int!
+}
+
+type AggregateStep {
   count: Int!
 }
 
@@ -14,6 +26,635 @@ type BatchPayload {
   count: Long!
 }
 
+type Direction implements Node {
+  id: ID!
+  steps(where: StepWhereInput, orderBy: StepOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Step!]
+}
+
+"""A connection to a list of items."""
+type DirectionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DirectionEdge]!
+  aggregate: AggregateDirection!
+}
+
+input DirectionCreateInput {
+  steps: StepCreateManyInput
+}
+
+input DirectionCreateManyInput {
+  create: [DirectionCreateInput!]
+  connect: [DirectionWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type DirectionEdge {
+  """The item at the end of the edge."""
+  node: Direction!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DirectionOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type DirectionPreviousValues {
+  id: ID!
+}
+
+input DirectionScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DirectionScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DirectionScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DirectionScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+}
+
+type DirectionSubscriptionPayload {
+  mutation: MutationType!
+  node: Direction
+  updatedFields: [String!]
+  previousValues: DirectionPreviousValues
+}
+
+input DirectionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DirectionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DirectionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DirectionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DirectionWhereInput
+}
+
+input DirectionUpdateDataInput {
+  steps: StepUpdateManyInput
+}
+
+input DirectionUpdateInput {
+  steps: StepUpdateManyInput
+}
+
+input DirectionUpdateManyInput {
+  create: [DirectionCreateInput!]
+  connect: [DirectionWhereUniqueInput!]
+  disconnect: [DirectionWhereUniqueInput!]
+  delete: [DirectionWhereUniqueInput!]
+  update: [DirectionUpdateWithWhereUniqueNestedInput!]
+  deleteMany: [DirectionScalarWhereInput!]
+  upsert: [DirectionUpsertWithWhereUniqueNestedInput!]
+}
+
+input DirectionUpdateWithWhereUniqueNestedInput {
+  where: DirectionWhereUniqueInput!
+  data: DirectionUpdateDataInput!
+}
+
+input DirectionUpsertWithWhereUniqueNestedInput {
+  where: DirectionWhereUniqueInput!
+  update: DirectionUpdateDataInput!
+  create: DirectionCreateInput!
+}
+
+input DirectionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DirectionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DirectionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DirectionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  steps_every: StepWhereInput
+  steps_some: StepWhereInput
+  steps_none: StepWhereInput
+}
+
+input DirectionWhereUniqueInput {
+  id: ID
+}
+
+type Ingredient implements Node {
+  id: ID!
+  title: String!
+  measurement: String!
+}
+
+"""A connection to a list of items."""
+type IngredientConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [IngredientEdge]!
+  aggregate: AggregateIngredient!
+}
+
+input IngredientCreateInput {
+  title: String!
+  measurement: String!
+}
+
+input IngredientCreateManyInput {
+  create: [IngredientCreateInput!]
+  connect: [IngredientWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type IngredientEdge {
+  """The item at the end of the edge."""
+  node: Ingredient!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum IngredientOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  measurement_ASC
+  measurement_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type IngredientPreviousValues {
+  id: ID!
+  title: String!
+  measurement: String!
+}
+
+input IngredientScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [IngredientScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [IngredientScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [IngredientScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  measurement: String
+
+  """All values that are not equal to given value."""
+  measurement_not: String
+
+  """All values that are contained in given list."""
+  measurement_in: [String!]
+
+  """All values that are not contained in given list."""
+  measurement_not_in: [String!]
+
+  """All values less than the given value."""
+  measurement_lt: String
+
+  """All values less than or equal the given value."""
+  measurement_lte: String
+
+  """All values greater than the given value."""
+  measurement_gt: String
+
+  """All values greater than or equal the given value."""
+  measurement_gte: String
+
+  """All values containing the given string."""
+  measurement_contains: String
+
+  """All values not containing the given string."""
+  measurement_not_contains: String
+
+  """All values starting with the given string."""
+  measurement_starts_with: String
+
+  """All values not starting with the given string."""
+  measurement_not_starts_with: String
+
+  """All values ending with the given string."""
+  measurement_ends_with: String
+
+  """All values not ending with the given string."""
+  measurement_not_ends_with: String
+}
+
+type IngredientSubscriptionPayload {
+  mutation: MutationType!
+  node: Ingredient
+  updatedFields: [String!]
+  previousValues: IngredientPreviousValues
+}
+
+input IngredientSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [IngredientSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [IngredientSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [IngredientSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: IngredientWhereInput
+}
+
+input IngredientUpdateDataInput {
+  title: String
+  measurement: String
+}
+
+input IngredientUpdateInput {
+  title: String
+  measurement: String
+}
+
+input IngredientUpdateManyDataInput {
+  title: String
+  measurement: String
+}
+
+input IngredientUpdateManyInput {
+  create: [IngredientCreateInput!]
+  connect: [IngredientWhereUniqueInput!]
+  disconnect: [IngredientWhereUniqueInput!]
+  delete: [IngredientWhereUniqueInput!]
+  update: [IngredientUpdateWithWhereUniqueNestedInput!]
+  updateMany: [IngredientUpdateManyWithWhereNestedInput!]
+  deleteMany: [IngredientScalarWhereInput!]
+  upsert: [IngredientUpsertWithWhereUniqueNestedInput!]
+}
+
+input IngredientUpdateManyMutationInput {
+  title: String
+  measurement: String
+}
+
+input IngredientUpdateManyWithWhereNestedInput {
+  where: IngredientScalarWhereInput!
+  data: IngredientUpdateManyDataInput!
+}
+
+input IngredientUpdateWithWhereUniqueNestedInput {
+  where: IngredientWhereUniqueInput!
+  data: IngredientUpdateDataInput!
+}
+
+input IngredientUpsertWithWhereUniqueNestedInput {
+  where: IngredientWhereUniqueInput!
+  update: IngredientUpdateDataInput!
+  create: IngredientCreateInput!
+}
+
+input IngredientWhereInput {
+  """Logical AND on all given filters."""
+  AND: [IngredientWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [IngredientWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [IngredientWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  measurement: String
+
+  """All values that are not equal to given value."""
+  measurement_not: String
+
+  """All values that are contained in given list."""
+  measurement_in: [String!]
+
+  """All values that are not contained in given list."""
+  measurement_not_in: [String!]
+
+  """All values less than the given value."""
+  measurement_lt: String
+
+  """All values less than or equal the given value."""
+  measurement_lte: String
+
+  """All values greater than the given value."""
+  measurement_gt: String
+
+  """All values greater than or equal the given value."""
+  measurement_gte: String
+
+  """All values containing the given string."""
+  measurement_contains: String
+
+  """All values not containing the given string."""
+  measurement_not_contains: String
+
+  """All values starting with the given string."""
+  measurement_starts_with: String
+
+  """All values not starting with the given string."""
+  measurement_not_starts_with: String
+
+  """All values ending with the given string."""
+  measurement_ends_with: String
+
+  """All values not ending with the given string."""
+  measurement_not_ends_with: String
+}
+
+input IngredientWhereUniqueInput {
+  id: ID
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -23,16 +664,33 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createRecipe(data: RecipeCreateInput!): Recipe!
+  createIngredient(data: IngredientCreateInput!): Ingredient!
+  createStep(data: StepCreateInput!): Step!
+  createDirection(data: DirectionCreateInput!): Direction!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateRecipe(data: RecipeUpdateInput!, where: RecipeWhereUniqueInput!): Recipe
+  updateIngredient(data: IngredientUpdateInput!, where: IngredientWhereUniqueInput!): Ingredient
+  updateStep(data: StepUpdateInput!, where: StepWhereUniqueInput!): Step
+  updateDirection(data: DirectionUpdateInput!, where: DirectionWhereUniqueInput!): Direction
   deleteUser(where: UserWhereUniqueInput!): User
   deleteRecipe(where: RecipeWhereUniqueInput!): Recipe
+  deleteIngredient(where: IngredientWhereUniqueInput!): Ingredient
+  deleteStep(where: StepWhereUniqueInput!): Step
+  deleteDirection(where: DirectionWhereUniqueInput!): Direction
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertRecipe(where: RecipeWhereUniqueInput!, create: RecipeCreateInput!, update: RecipeUpdateInput!): Recipe!
+  upsertIngredient(where: IngredientWhereUniqueInput!, create: IngredientCreateInput!, update: IngredientUpdateInput!): Ingredient!
+  upsertStep(where: StepWhereUniqueInput!, create: StepCreateInput!, update: StepUpdateInput!): Step!
+  upsertDirection(where: DirectionWhereUniqueInput!, create: DirectionCreateInput!, update: DirectionUpdateInput!): Direction!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyRecipes(data: RecipeUpdateManyMutationInput!, where: RecipeWhereInput): BatchPayload!
+  updateManyIngredients(data: IngredientUpdateManyMutationInput!, where: IngredientWhereInput): BatchPayload!
+  updateManySteps(data: StepUpdateManyMutationInput!, where: StepWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyRecipes(where: RecipeWhereInput): BatchPayload!
+  deleteManyIngredients(where: IngredientWhereInput): BatchPayload!
+  deleteManySteps(where: StepWhereInput): BatchPayload!
+  deleteManyDirections(where: DirectionWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -65,10 +723,19 @@ type PageInfo {
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   recipes(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipe]!
+  ingredients(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Ingredient]!
+  steps(where: StepWhereInput, orderBy: StepOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Step]!
+  directions(where: DirectionWhereInput, orderBy: DirectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Direction]!
   user(where: UserWhereUniqueInput!): User
   recipe(where: RecipeWhereUniqueInput!): Recipe
+  ingredient(where: IngredientWhereUniqueInput!): Ingredient
+  step(where: StepWhereUniqueInput!): Step
+  direction(where: DirectionWhereUniqueInput!): Direction
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   recipesConnection(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecipeConnection!
+  ingredientsConnection(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): IngredientConnection!
+  stepsConnection(where: StepWhereInput, orderBy: StepOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StepConnection!
+  directionsConnection(where: DirectionWhereInput, orderBy: DirectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DirectionConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -81,8 +748,12 @@ type Recipe implements Node {
   id: ID!
   title: String!
   description: String!
+  preperationTime: Int!
+  cookingTime: Int!
   image: String
   largeImage: String
+  ingredients(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Ingredient!]
+  directions(where: DirectionWhereInput, orderBy: DirectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Direction!]
 }
 
 """A connection to a list of items."""
@@ -98,8 +769,12 @@ type RecipeConnection {
 input RecipeCreateInput {
   title: String!
   description: String!
+  preperationTime: Int!
+  cookingTime: Int!
   image: String
   largeImage: String
+  ingredients: IngredientCreateManyInput
+  directions: DirectionCreateManyInput
 }
 
 """An edge in a connection."""
@@ -118,6 +793,10 @@ enum RecipeOrderByInput {
   title_DESC
   description_ASC
   description_DESC
+  preperationTime_ASC
+  preperationTime_DESC
+  cookingTime_ASC
+  cookingTime_DESC
   image_ASC
   image_DESC
   largeImage_ASC
@@ -132,6 +811,8 @@ type RecipePreviousValues {
   id: ID!
   title: String!
   description: String!
+  preperationTime: Int!
+  cookingTime: Int!
   image: String
   largeImage: String
 }
@@ -178,13 +859,19 @@ input RecipeSubscriptionWhereInput {
 input RecipeUpdateInput {
   title: String
   description: String
+  preperationTime: Int
+  cookingTime: Int
   image: String
   largeImage: String
+  ingredients: IngredientUpdateManyInput
+  directions: DirectionUpdateManyInput
 }
 
 input RecipeUpdateManyMutationInput {
   title: String
   description: String
+  preperationTime: Int
+  cookingTime: Int
   image: String
   largeImage: String
 }
@@ -318,6 +1005,50 @@ input RecipeWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  preperationTime: Int
+
+  """All values that are not equal to given value."""
+  preperationTime_not: Int
+
+  """All values that are contained in given list."""
+  preperationTime_in: [Int!]
+
+  """All values that are not contained in given list."""
+  preperationTime_not_in: [Int!]
+
+  """All values less than the given value."""
+  preperationTime_lt: Int
+
+  """All values less than or equal the given value."""
+  preperationTime_lte: Int
+
+  """All values greater than the given value."""
+  preperationTime_gt: Int
+
+  """All values greater than or equal the given value."""
+  preperationTime_gte: Int
+  cookingTime: Int
+
+  """All values that are not equal to given value."""
+  cookingTime_not: Int
+
+  """All values that are contained in given list."""
+  cookingTime_in: [Int!]
+
+  """All values that are not contained in given list."""
+  cookingTime_not_in: [Int!]
+
+  """All values less than the given value."""
+  cookingTime_lt: Int
+
+  """All values less than or equal the given value."""
+  cookingTime_lte: Int
+
+  """All values greater than the given value."""
+  cookingTime_gt: Int
+
+  """All values greater than or equal the given value."""
+  cookingTime_gte: Int
   image: String
 
   """All values that are not equal to given value."""
@@ -398,15 +1129,341 @@ input RecipeWhereInput {
 
   """All values not ending with the given string."""
   largeImage_not_ends_with: String
+  ingredients_every: IngredientWhereInput
+  ingredients_some: IngredientWhereInput
+  ingredients_none: IngredientWhereInput
+  directions_every: DirectionWhereInput
+  directions_some: DirectionWhereInput
+  directions_none: DirectionWhereInput
 }
 
 input RecipeWhereUniqueInput {
   id: ID
 }
 
+type Step implements Node {
+  id: ID!
+  description: String!
+}
+
+"""A connection to a list of items."""
+type StepConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [StepEdge]!
+  aggregate: AggregateStep!
+}
+
+input StepCreateInput {
+  description: String!
+}
+
+input StepCreateManyInput {
+  create: [StepCreateInput!]
+  connect: [StepWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type StepEdge {
+  """The item at the end of the edge."""
+  node: Step!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum StepOrderByInput {
+  id_ASC
+  id_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type StepPreviousValues {
+  id: ID!
+  description: String!
+}
+
+input StepScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StepScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StepScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StepScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
+type StepSubscriptionPayload {
+  mutation: MutationType!
+  node: Step
+  updatedFields: [String!]
+  previousValues: StepPreviousValues
+}
+
+input StepSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StepSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StepSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StepSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: StepWhereInput
+}
+
+input StepUpdateDataInput {
+  description: String
+}
+
+input StepUpdateInput {
+  description: String
+}
+
+input StepUpdateManyDataInput {
+  description: String
+}
+
+input StepUpdateManyInput {
+  create: [StepCreateInput!]
+  connect: [StepWhereUniqueInput!]
+  disconnect: [StepWhereUniqueInput!]
+  delete: [StepWhereUniqueInput!]
+  update: [StepUpdateWithWhereUniqueNestedInput!]
+  updateMany: [StepUpdateManyWithWhereNestedInput!]
+  deleteMany: [StepScalarWhereInput!]
+  upsert: [StepUpsertWithWhereUniqueNestedInput!]
+}
+
+input StepUpdateManyMutationInput {
+  description: String
+}
+
+input StepUpdateManyWithWhereNestedInput {
+  where: StepScalarWhereInput!
+  data: StepUpdateManyDataInput!
+}
+
+input StepUpdateWithWhereUniqueNestedInput {
+  where: StepWhereUniqueInput!
+  data: StepUpdateDataInput!
+}
+
+input StepUpsertWithWhereUniqueNestedInput {
+  where: StepWhereUniqueInput!
+  update: StepUpdateDataInput!
+  create: StepCreateInput!
+}
+
+input StepWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StepWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StepWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StepWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
+input StepWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   recipe(where: RecipeSubscriptionWhereInput): RecipeSubscriptionPayload
+  ingredient(where: IngredientSubscriptionWhereInput): IngredientSubscriptionPayload
+  step(where: StepSubscriptionWhereInput): StepSubscriptionPayload
+  direction(where: DirectionSubscriptionWhereInput): DirectionSubscriptionPayload
 }
 
 type User implements Node {

@@ -1,6 +1,8 @@
+import CreateRecipe from '../components/CreateRecipe';
+
 const Create = props => (
   <div>
-    <h1>Lets make a recipie</h1>
+    <CreateRecipe />
   </div>
 );
 
