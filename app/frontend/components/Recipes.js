@@ -12,20 +12,7 @@ const ALL_RECIPES_QUERY = gql`
       description
       image
       largeImage
-      cookingTime
-      preperationTime
-      ingredients {
-        id
-        title
-        measurement
-      }
-      directions {
-        id
-        steps {
-          id
-          description
-        }
-      }
+      ingredients
     }
   }
 `;

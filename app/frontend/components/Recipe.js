@@ -4,7 +4,6 @@ import Link from 'next/link';
 import RecipeStyles from './styles/RecipeSyles';
 import Title from './styles/Title';
 import Underline from './styles/Underline';
-import Recipes from './Recipes';
 
 class Recipe extends Component {
   static propTypes = {
@@ -28,6 +27,9 @@ class Recipe extends Component {
         </Title>
         <Underline />
         <p>{recipe.description}</p>
+        {recipe.ingredients.map((a, index) => (
+          <p key={index}>{a.ingredient}</p>
+        ))}
         <div className="buttonList">
           <Link
             href={{

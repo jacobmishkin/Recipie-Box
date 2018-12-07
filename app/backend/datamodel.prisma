@@ -4,32 +4,16 @@ type User {
   email: String!
 }
 
-type Ingredient {
-  id: ID! @unique
-  title: String!
-  measurement: String!
-}
-
-type Step {
-  id: ID! @unique
-  description: String!
-}
-
-type Direction {
-  id: ID! @unique
-  steps: [Step!]!
-}
-
 type Recipe {
   id: ID! @unique
   title: String!
   description: String!
-  preperationTime: Int!
-  cookingTime: Int!
+  preperationTime: Int
+  cookingTime: Int
   image: String
   largeImage: String
-  ingredients: [Ingredient!]!
-  directions: [Direction!]!
+  ingredients: [Json]
+  directions: [String]
   #createdAt: DateTime!
   #updatedAt: DateTime!
   # user: User!

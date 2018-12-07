@@ -1,6 +1,8 @@
 # import * from './generated/prisma.graphql'
+
+
 type Mutation {
-  createRecipe(title: String, description: String, image: String, largeImage: String): Recipe!
+  createRecipe(title: String, description: String, image: String, largeImage: String, ingredients: RecipeCreateingredientsInput): Recipe!
 }
 
 type Query {
