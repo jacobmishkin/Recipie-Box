@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/jacob-mishkin/recipe-box/dev
-# timestamp: Thu Dec 06 2018 17:14:55 GMT-0600 (CST)
+# timestamp: Sat Dec 08 2018 14:02:15 GMT-0600 (CST)
 
 type AggregateRecipe {
   count: Int!
@@ -89,7 +89,7 @@ type Recipe implements Node {
   image: String
   largeImage: String
   ingredients: [Json!]!
-  directions: [String!]!
+  directions: [Json!]!
 }
 
 """A connection to a list of items."""
@@ -103,7 +103,7 @@ type RecipeConnection {
 }
 
 input RecipeCreatedirectionsInput {
-  set: [String!]
+  set: [Json!]
 }
 
 input RecipeCreateingredientsInput {
@@ -160,7 +160,7 @@ type RecipePreviousValues {
   image: String
   largeImage: String
   ingredients: [Json!]!
-  directions: [String!]!
+  directions: [Json!]!
 }
 
 type RecipeSubscriptionPayload {
@@ -203,7 +203,7 @@ input RecipeSubscriptionWhereInput {
 }
 
 input RecipeUpdatedirectionsInput {
-  set: [String!]
+  set: [Json!]
 }
 
 input RecipeUpdateingredientsInput {

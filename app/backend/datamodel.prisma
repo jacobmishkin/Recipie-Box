@@ -4,6 +4,7 @@ type User {
   email: String!
 }
 
+
 type Recipe {
   id: ID! @unique
   title: String!
@@ -12,8 +13,8 @@ type Recipe {
   cookingTime: Int
   image: String
   largeImage: String
-  ingredients: [Json]
-  directions: [String]
+  ingredients: [Json!]
+  directions: [Json!]
   #createdAt: DateTime!
   #updatedAt: DateTime!
   # user: User!

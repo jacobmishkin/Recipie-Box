@@ -6,12 +6,8 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 
 const CREATE_RECIPIE_MUTATION = gql`
-  mutation CREATE_RECIPIE_MUTATION(
-    $title: String!
-    $description: String!
-    $ingredients: RecipeCreateingredientsInput
-  ) {
-    createRecipe(title: $title, description: $description, ingredients: $ingredients) {
+  mutation CREATE_RECIPIE_MUTATION($title: String!, $description: String!, $ingredients: [Json!]) {
+    createRecipe(title: $title, description: $description, ingredients: { set: $ingredients }) {
       id
       title
       description
@@ -21,12 +17,12 @@ const CREATE_RECIPIE_MUTATION = gql`
 `;
 class CreateRecipe extends Component {
   state = {
-    title: 'cheese cake',
-    description: 'what a cake',
+    title: '',
+    description: '',
     image: 'jam.jpg',
     largeImage: 'large-jam.jpg',
     directions: [{ direction: '' }],
-    ingredients: [{ ingredient: 'cheese' }],
+    ingredients: [{ ingredient: '' }],
   };
 
   handleChange = e => {
