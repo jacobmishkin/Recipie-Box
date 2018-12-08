@@ -13,6 +13,7 @@ const ALL_RECIPES_QUERY = gql`
       image
       largeImage
       ingredients
+      directions
     }
   }
 `;

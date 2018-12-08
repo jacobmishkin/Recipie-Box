@@ -30,6 +30,9 @@ class Recipe extends Component {
         {recipe.ingredients.map((a, index) => (
           <p key={index}>{a.ingredient}</p>
         ))}
+        {recipe.directions.map((a, index) => (
+          <p key={index}>{a.direction}</p>
+        ))}
         <div className="buttonList">
           <Link
             href={{
