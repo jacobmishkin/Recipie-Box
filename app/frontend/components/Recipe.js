@@ -27,11 +27,11 @@ class Recipe extends Component {
         </Title>
         <Underline />
         <p>{recipe.description}</p>
-        {recipe.ingredients.map((a, index) => (
-          <p key={index}>{a.ingredient}</p>
+        {recipe.ingredients.map(recipes => (
+          <p key={recipes.ingredient}>{recipes.ingredient}</p>
         ))}
-        {recipe.directions.map((a, index) => (
-          <p key={index}>{a.direction}</p>
+        {recipe.directions.map(recipes => (
+          <p key={recipes.direction}>{recipes.direction}</p>
         ))}
         <div className="buttonList">
           <Link

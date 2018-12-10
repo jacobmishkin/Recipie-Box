@@ -36,7 +36,6 @@ class Recipes extends Component {
       <Center>
         <Query query={ALL_RECIPES_QUERY}>
           {({ data, error, loading }) => {
-            console.log(data);
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error: {error.message}</p>;
             return (

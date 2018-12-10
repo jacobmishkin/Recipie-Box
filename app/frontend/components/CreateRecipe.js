@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
+import Router from 'next/router';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 
@@ -9,29 +10,29 @@ const CREATE_RECIPIE_MUTATION = gql`
   mutation CREATE_RECIPIE_MUTATION(
     $title: String!
     $description: String!
+    $image: String
+    $largeImage: String
     $ingredients: [Json!]
     $directions: [Json!]
   ) {
     createRecipe(
       title: $title
       description: $description
+      image: $image
+      largeImage: $largeImage
       ingredients: { set: $ingredients }
       directions: { set: $directions }
     ) {
       id
-      title
-      description
-      ingredients
-      directions
     }
   }
 `;
 class CreateRecipe extends Component {
   state = {
-    title: 'cheese cake',
-    description: 'what a cake',
-    image: 'jam.jpg',
-    largeImage: 'large-jam.jpg',
+    title: '',
+    description: '',
+    image: '',
+    largeImage: '',
     directions: [{ direction: '' }],
     ingredients: [{ ingredient: '' }],
   };
@@ -62,20 +63,54 @@ class CreateRecipe extends Component {
     }));
   };
 
+  uploadFile = async e => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'recipe');
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/dysj8nmlu/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+    const file = await res.json();
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
+  };
+
   render() {
     const { ingredients, directions } = this.state;
     return (
       <Mutation mutation={CREATE_RECIPIE_MUTATION} variables={this.state}>
-        {(createRecipie, { loading, error }) => (
+        {(createRecipe, { loading, error }) => (
           <Form
             onSubmit={async e => {
               e.preventDefault();
-              const res = await createRecipie();
-              console.log(res);
+              const res = await createRecipe();
+              Router.push({
+                pathname: '/recipe',
+                query: { id: res.data.createRecipe.id },
+              });
             }}
           >
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
+              <label htmlFor="file">
+                Image
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  placeholder="Upload"
+                  required
+                  onChange={this.uploadFile}
+                />
+                {this.state.image && (
+                  <img width="200" src={this.state.image} alt="upload preview" />
+                )}
+              </label>
               <label htmlFor="title">
                 Title
                 <input

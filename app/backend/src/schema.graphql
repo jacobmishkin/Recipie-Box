@@ -2,7 +2,7 @@
 
 
 type Mutation {
-  createRecipe(title: String, description: String, image: String, largeImage: String, ingredients: RecipeCreateingredientsInput, directions:RecipeCreatedirectionsInput ): Recipe!
+  createRecipe(title: String, description: String, image: String, largeImage: String, ingredients: RecipeCreateingredientsInput, directions:RecipeCreatedirectionsInput, image: String, largeImage: String ): Recipe!
 }
 
 type Query {
